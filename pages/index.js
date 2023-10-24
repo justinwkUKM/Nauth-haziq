@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { useSession } from "next-auth/react"
 
 export default function Home() {
+  const { data: session, status } = useSession()
+
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user.email}</p>
+  }
   return (
     <div className={styles.container}>
       <Head>
